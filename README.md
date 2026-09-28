@@ -3,7 +3,7 @@
 Aplikasi Laravel untuk mengelola inventaris kantor: barang, kategori, supplier, multi-gudang, stok masuk/keluar/pindah, peminjaman dengan alur persetujuan, maintenance, barcode/QR, notifikasi, manajemen pengguna, dan laporan.
 
 ## Fitur
-
+ 
 - **Barang** — data master barang lengkap dengan kode, barcode otomatis, foto, lokasi, gudang, harga.
 - **Kategori & Supplier** — CRUD cepat lewat modal, tanpa reload halaman (Alpine.js).
 - **Multi-Gudang** — kelola beberapa gudang/lokasi, lihat stok per gudang di setiap barang, dan **pindahkan stok antar gudang** dengan riwayat lengkap.
