@@ -1,5 +1,5 @@
 # Gudang.in — Sistem Inventaris & Manajemen Aset Kantor
-
+ 
 Aplikasi Laravel untuk mengelola inventaris kantor: barang, kategori, supplier, multi-gudang, stok masuk/keluar/pindah, peminjaman dengan alur persetujuan, maintenance, barcode/QR, notifikasi, manajemen pengguna, dan laporan.
 
 ## Fitur
