@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('title', 'Notifikasi')
-@section('subtitle', 'Peringatan stok menipis, jatuh tempo peminjaman, dan pengajuan yang perlu disetujui')
+@section('subtitle', 'Stok menipis, pinjaman jatuh tempo, dan pengajuan yang menunggu')
 
 @section('content')
 <div class="flex items-center justify-between gap-3 mb-5">
     <div class="flex gap-2">
         <a href="{{ route('notifications.index') }}" class="text-xs font-semibold px-3 py-2 rounded-lg border {{ !request('filter') ? 'bg-ink-950 text-white border-ink-950' : 'border-ink-900/15 hover:bg-ink-900/5' }}">Semua</a>
-        <a href="{{ route('notifications.index', ['filter' => 'unread']) }}" class="text-xs font-semibold px-3 py-2 rounded-lg border {{ request('filter') === 'unread' ? 'bg-ink-950 text-white border-ink-950' : 'border-ink-900/15 hover:bg-ink-900/5' }}">Belum Dibaca</a>
+        <a href="{{ route('notifications.index', ['filter' => 'unread']) }}" class="text-xs font-semibold px-3 py-2 rounded-lg border {{ request('filter') === 'unread' ? 'bg-ink-950 text-white border-ink-950' : 'border-ink-900/15 hover:bg-ink-900/5' }}">Belum dibaca</a>
     </div>
     <form action="{{ route('notifications.read-all') }}" method="POST">
         @csrf
-        <button class="text-xs font-semibold px-3 py-2 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Tandai Semua Dibaca</button>
+        <button class="text-xs font-semibold px-3 py-2 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Tandai semua sudah dibaca</button>
     </form>
 </div>
 

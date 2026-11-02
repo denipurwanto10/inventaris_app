@@ -31,15 +31,27 @@ class DashboardController extends Controller
             ->whereYear('date', now()->year)
             ->sum('qty');
 
+        // Window is 6 months. When nothing moved recently (demo/stale data), anchor the
+        // window on the latest month that still has movements so the chart isn't blank.
+        $latestMovement = StockMovement::max('date');
+        $latestMonth = $latestMovement ? \Illuminate\Support\Carbon::parse($latestMovement)->startOfMonth() : null;
+        $thisMonth = now()->startOfMonth();
+        $anchor = ($latestMonth && $latestMonth->lt($thisMonth->copy()->subMonths(5))) ? $latestMonth : $thisMonth;
+        $chartStart = $anchor->copy()->subMonths(5);
+
         $chartData = StockMovement::select(
                 DB::raw("DATE_FORMAT(date, '%Y-%m') as bulan"),
                 'type',
                 DB::raw('SUM(qty) as total')
             )
-            ->where('date', '>=', now()->subMonths(5)->startOfMonth())
+            ->where('date', '>=', $chartStart)
             ->groupBy('bulan', 'type')
             ->orderBy('bulan')
             ->get();
+
+        // Every month in the window gets a slot, including months with no movement.
+        $chartMonths = collect(range(0, 5))->map(fn ($i) => $chartStart->copy()->addMonths($i)->format('Y-m'))->all();
+        $chartRange = $chartStart->locale('id')->isoFormat('MMM') . ' – ' . $anchor->copy()->locale('id')->isoFormat('MMM YYYY');
 
         $lowStockItems = Item::whereColumn('stock', '<=', 'min_stock')
             ->orderBy('stock')
@@ -74,7 +86,7 @@ class DashboardController extends Controller
         return view('dashboard.index', compact(
             'totalItems', 'totalStock', 'totalStockValue', 'lowStock', 'activeLoans', 'pendingLoans',
             'inProgressMaintenance', 'outThisMonth', 'inThisMonth',
-            'chartData', 'lowStockItems', 'recentMovements',
+            'chartData', 'chartMonths', 'chartRange', 'lowStockItems', 'recentMovements',
             'categoryValue', 'topMovingItems', 'warehouseStock'
         ));
     }

@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Label — {{ $item->name }}</title>
+    <title>Label {{ $item->name }}</title>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 24px; background: #f4f6f4; }

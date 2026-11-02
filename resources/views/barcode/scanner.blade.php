@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Pindai Barcode / QR')
-@section('subtitle', 'Cari barang secara instan lewat kamera perangkat')
+@section('title', 'Pindai barcode / QR')
+@section('subtitle', 'Arahkan kamera ke barcode atau QR pada barang')
 
 @section('content')
 <div class="max-w-xl mx-auto" x-data="scannerApp()" x-init="init()">
@@ -8,7 +8,7 @@
         <div id="reader" class="rounded-lg overflow-hidden"></div>
 
         <div class="mt-4 flex gap-2">
-            <input type="text" x-model="manualCode" @keydown.enter.prevent="lookup(manualCode)" placeholder="Atau ketik kode barang secara manual…"
+            <input type="text" x-model="manualCode" @keydown.enter.prevent="lookup(manualCode)" placeholder="Atau ketik kodenya di sini"
                 class="flex-1 rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
             <button @click="lookup(manualCode)" class="text-sm font-semibold px-4 py-2.5 rounded-lg bg-moss-600 text-white hover:bg-moss-700">Cari</button>
         </div>
@@ -17,7 +17,7 @@
     <div x-show="result" x-cloak class="mt-4 bg-white rounded-xl border border-ink-900/8 shadow-panel p-5">
         <template x-if="result && result.found">
             <div>
-                <p class="text-[11px] font-semibold uppercase text-moss-600">Barang Ditemukan</p>
+                <p class="text-[11px] font-semibold uppercase text-moss-600">Barang ditemukan</p>
                 <p class="text-lg font-extrabold mt-1" x-text="result.item.name"></p>
                 <p class="text-xs text-ink-900/40 font-mono" x-text="result.item.code"></p>
                 <div class="grid grid-cols-2 gap-3 mt-4">
@@ -30,11 +30,11 @@
                         <p class="font-bold" x-text="result.item.location || '-'"></p>
                     </div>
                 </div>
-                <a :href="result.item.url" class="inline-flex mt-4 text-sm font-semibold px-4 py-2.5 rounded-lg bg-ink-950 text-white hover:bg-ink-900">Lihat Detail Barang →</a>
+                <a :href="result.item.url" class="inline-flex mt-4 text-sm font-semibold px-4 py-2.5 rounded-lg bg-ink-950 text-white hover:bg-ink-900">Lihat detail barang</a>
             </div>
         </template>
         <template x-if="result && !result.found">
-            <p class="text-sm text-rose-500 py-2">Barang dengan kode tersebut tidak ditemukan.</p>
+            <p class="text-sm text-rose-500 py-2">Kode ini tidak cocok dengan barang mana pun.</p>
         </template>
     </div>
 </div>

@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('title', 'Supplier')
-@section('subtitle', 'Daftar mitra pemasok barang')
+@section('subtitle', 'Pemasok tempat barang dibeli')
 
 @section('content')
 <div x-data="{ modalOpen: false, editing: null, form: { id: null, code: '', name: '', contact_person: '', phone: '', email: '', address: '' } }">
 
     <div class="flex flex-col sm:flex-row sm:items-center gap-3 justify-between mb-5">
         <form method="GET" class="flex-1 max-w-xs">
-            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari supplier…"
+            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari supplier"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </form>
         <button @click="modalOpen = true; editing = null; form = { id: null, code: '', name: '', contact_person: '', phone: '', email: '', address: '' }"
             class="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-lg bg-ink-950 text-white hover:bg-ink-900 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            Tambah Supplier
+            Tambah supplier
         </button>
     </div>
 
@@ -48,7 +48,7 @@
 
     <div class="mt-4">{{ $suppliers->links() }}</div>
 
-    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 grid place-items-center p-4 bg-ink-950/50" @keydown.escape.window="modalOpen=false">
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 grid place-items-center p-4 bg-black/45 backdrop-blur-[2px]" x-transition:enter="transition-opacity duration-300 ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-200 ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @keydown.escape.window="modalOpen=false">
         <div @click.outside="modalOpen=false" class="bg-white rounded-2xl w-full max-w-md shadow-2xl max-h-[90vh] overflow-y-auto">
             <form :action="editing ? `/suppliers/${editing}` : '{{ route('suppliers.store') }}'" method="POST" class="p-6">
                 @csrf
@@ -61,13 +61,13 @@
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40" placeholder="SUP001">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama Perusahaan</label>
+                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama perusahaan</label>
                         <input type="text" name="name" x-model="form.name" required
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
                     </div>
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Kontak Person</label>
+                            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Kontak person</label>
                             <input type="text" name="contact_person" x-model="form.contact_person"
                                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
                         </div>

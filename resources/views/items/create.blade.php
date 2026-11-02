@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Tambah Barang')
-@section('subtitle', 'Daftarkan barang baru ke dalam sistem')
+@section('title', 'Tambah barang')
+@section('subtitle', 'Isi data barang yang baru datang')
 
 @section('content')
 <form action="{{ route('items.store') }}" method="POST" class="max-w-3xl bg-white rounded-xl border border-ink-900/8 shadow-panel p-6">
@@ -8,13 +8,13 @@
 
     <div class="grid sm:grid-cols-2 gap-4">
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Kode Barang</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Kode barang</label>
             <input type="text" name="code" value="{{ old('code', $nextCode) }}" required
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-moss-500/40">
             @error('code')<p class="text-xs text-rose-500 mt-1">{{ $message }}</p>@enderror
         </div>
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama Barang</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama barang</label>
             <input type="text" name="name" value="{{ old('name') }}" required placeholder="Contoh: Laptop Lenovo ThinkPad E14"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
             @error('name')<p class="text-xs text-rose-500 mt-1">{{ $message }}</p>@enderror
@@ -56,24 +56,24 @@
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Harga Beli (Rp)</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Harga beli (Rp)</label>
             <input type="number" step="0.01" min="0" name="purchase_price" value="{{ old('purchase_price', 0) }}"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
 
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Stok Awal</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Stok awal</label>
             <input type="number" min="0" name="stock" value="{{ old('stock', 0) }}" required
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Stok Minimum</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Stok minimum</label>
             <input type="number" min="0" name="min_stock" value="{{ old('min_stock', 5) }}" required
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
 
         <div class="sm:col-span-2">
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Lokasi Penyimpanan</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Lokasi penyimpanan</label>
             <input type="text" name="location" value="{{ old('location') }}" placeholder="Contoh: Gudang A - Rak 3"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
@@ -85,7 +85,7 @@
 
     <div class="flex items-center gap-2 mt-6 pt-5 border-t border-ink-900/8">
         <a href="{{ route('items.index') }}" class="text-sm font-semibold px-4 py-2.5 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Batal</a>
-        <button type="submit" class="text-sm font-semibold px-5 py-2.5 rounded-lg bg-moss-600 text-white hover:bg-moss-700">Simpan Barang</button>
+        <button type="submit" class="text-sm font-semibold px-5 py-2.5 rounded-lg bg-moss-600 text-white hover:bg-moss-700">Simpan barang</button>
     </div>
 </form>
 @endsection

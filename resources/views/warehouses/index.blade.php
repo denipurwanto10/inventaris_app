@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('title', 'Gudang')
-@section('subtitle', 'Kelola lokasi/gudang tempat barang disimpan')
+@section('subtitle', 'Tempat barang disimpan')
 
 @section('content')
 <div x-data="{ modalOpen: false, editing: null, form: { id: null, code: '', name: '', address: '', pic: '', is_active: true } }">
 
     <div class="flex flex-col sm:flex-row sm:items-center gap-3 justify-between mb-5">
         <form method="GET" class="flex-1 max-w-xs">
-            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari gudang…"
+            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari gudang"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </form>
         <button @click="modalOpen = true; editing = null; form = { id: null, code: '', name: '', address: '', pic: '', is_active: true }"
             class="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-lg bg-ink-950 text-white hover:bg-ink-900 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            Tambah Gudang
+            Tambah gudang
         </button>
     </div>
 
@@ -22,9 +22,9 @@
             <thead>
                 <tr class="text-left text-[11px] uppercase tracking-wide text-ink-900/40 border-b border-ink-900/8 bg-ink-900/[0.02]">
                     <th class="py-3 px-5 font-semibold">Kode</th>
-                    <th class="py-3 px-2 font-semibold">Nama Gudang</th>
+                    <th class="py-3 px-2 font-semibold">Nama gudang</th>
                     <th class="py-3 px-2 font-semibold">PIC</th>
-                    <th class="py-3 px-2 font-semibold">Jumlah Barang</th>
+                    <th class="py-3 px-2 font-semibold">Jumlah barang</th>
                     <th class="py-3 px-2 font-semibold">Status</th>
                     <th class="py-3 px-5 font-semibold text-right">Aksi</th>
                 </tr>
@@ -52,7 +52,7 @@
                         @unless ($w->is_default)
                         <form action="{{ route('warehouses.set-default', $w) }}" method="POST" class="inline" onsubmit="return confirm('Jadikan {{ $w->name }} sebagai gudang utama?')">
                             @csrf
-                            <button class="text-xs font-semibold text-ink-900/60 hover:text-moss-600">Jadikan Utama</button>
+                            <button class="text-xs font-semibold text-ink-900/60 hover:text-moss-600">Jadikan utama</button>
                         </form>
                         @endunless
                         <button @click="modalOpen = true; editing = {{ $w->id }}; form = { id: {{ $w->id }}, code: '{{ $w->code }}', name: `{{ $w->name }}`, address: `{{ $w->address }}`, pic: `{{ $w->pic }}`, is_active: {{ $w->is_active ? 'true' : 'false' }} }"
@@ -64,7 +64,7 @@
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="6" class="py-10 text-center text-ink-900/40">Belum ada gudang. Tambahkan gudang pertama Anda.</td></tr>
+                <tr><td colspan="6" class="py-10 text-center text-ink-900/40">Belum ada gudang. Tambahkan yang pertama.</td></tr>
                 @endforelse
             </tbody>
         </table>
@@ -73,7 +73,7 @@
     <div class="mt-4">{{ $warehouses->links() }}</div>
 
     {{-- Modal --}}
-    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 grid place-items-center p-4 bg-ink-950/50" @keydown.escape.window="modalOpen=false">
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 grid place-items-center p-4 bg-black/45 backdrop-blur-[2px]" x-transition:enter="transition-opacity duration-300 ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-200 ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @keydown.escape.window="modalOpen=false">
         <div @click.outside="modalOpen=false" class="bg-white rounded-2xl w-full max-w-md shadow-2xl">
             <form :action="editing ? `/gudang/${editing}` : '{{ route('warehouses.store') }}'" method="POST" class="p-6">
                 @csrf
@@ -86,7 +86,7 @@
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40" placeholder="GD-A">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama Gudang</label>
+                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama gudang</label>
                         <input type="text" name="name" x-model="form.name" required
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40" placeholder="Gudang A">
                     </div>
@@ -96,7 +96,7 @@
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40"></textarea>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Penanggung Jawab (opsional)</label>
+                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Penanggung jawab (opsional)</label>
                         <input type="text" name="pic" x-model="form.pic"
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
                     </div>

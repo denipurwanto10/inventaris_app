@@ -13,7 +13,7 @@
                 </div>
                 <div class="flex gap-2 shrink-0">
                     <a href="{{ route('items.edit', $item) }}" class="text-xs font-semibold px-3 py-2 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Ubah</a>
-                    <form action="{{ route('items.destroy', $item) }}" method="POST" onsubmit="return confirm('Hapus barang ini beserta seluruh riwayatnya?')">
+                    <form action="{{ route('items.destroy', $item) }}" method="POST" onsubmit="return confirm('Hapus barang ini beserta riwayatnya?')">
                         @csrf @method('DELETE')
                         <button class="text-xs font-semibold px-3 py-2 rounded-lg border border-rose-200 text-rose-500 hover:bg-rose-50">Hapus</button>
                     </form>
@@ -30,11 +30,11 @@
                     <p class="font-extrabold text-lg {{ $item->is_low_stock ? 'text-rose-500' : '' }}">{{ $item->stock }} <span class="text-xs font-medium text-ink-900/40">{{ $item->unit }}</span></p>
                 </div>
                 <div class="rounded-lg bg-ink-900/[0.03] p-3">
-                    <p class="text-[10px] uppercase tracking-wide text-ink-900/40 font-semibold">Stok Min.</p>
+                    <p class="text-[10px] uppercase tracking-wide text-ink-900/40 font-semibold">Stok min.</p>
                     <p class="font-extrabold text-lg">{{ $item->min_stock }}</p>
                 </div>
                 <div class="rounded-lg bg-ink-900/[0.03] p-3">
-                    <p class="text-[10px] uppercase tracking-wide text-ink-900/40 font-semibold">Harga Beli</p>
+                    <p class="text-[10px] uppercase tracking-wide text-ink-900/40 font-semibold">Harga beli</p>
                     <p class="font-extrabold text-lg">Rp{{ number_format($item->purchase_price, 0, ',', '.') }}</p>
                 </div>
                 <div class="rounded-lg bg-ink-900/[0.03] p-3">
@@ -49,7 +49,7 @@
         </div>
 
         <div class="bg-white rounded-xl border border-ink-900/8 shadow-panel p-5">
-            <h3 class="font-bold text-sm mb-3">Riwayat Stok Terbaru</h3>
+            <h3 class="font-bold text-sm mb-3">Riwayat stok terbaru</h3>
             <div class="overflow-x-auto -mx-5">
                 <table class="w-full text-sm min-w-[480px]">
                     <thead>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="bg-white rounded-xl border border-ink-900/8 shadow-panel p-5">
-            <h3 class="font-bold text-sm mb-3">Riwayat Maintenance</h3>
+            <h3 class="font-bold text-sm mb-3">Riwayat maintenance</h3>
             @forelse ($maintenances as $m)
             <div class="flex items-center justify-between py-2 border-b border-ink-900/5 last:border-0 text-sm">
                 <div>
@@ -94,16 +94,16 @@
 
     <div class="space-y-5">
         <div class="bg-white rounded-xl border border-ink-900/8 shadow-panel p-5">
-            <p class="text-[11px] uppercase tracking-wide text-ink-900/40 font-semibold mb-3">Stok per Gudang</p>
+            <p class="text-[11px] uppercase tracking-wide text-ink-900/40 font-semibold mb-3">Stok per gudang</p>
             @forelse ($stockByWarehouse as $sw)
             <div class="flex items-center justify-between py-2 border-b border-ink-900/5 last:border-0 text-sm">
-                <span class="font-medium">{{ $sw->warehouse->name ?? '—' }}</span>
+                <span class="font-medium">{{ $sw->warehouse->name ?? '-' }}</span>
                 <span class="font-mono font-semibold">{{ $sw->qty }} {{ $item->unit }}</span>
             </div>
             @empty
             <p class="text-sm text-ink-900/40 py-3 text-center">
                 @if ($item->warehouse)
-                    Seluruh stok tercatat di <strong>{{ $item->warehouse->name }}</strong> namun belum terperinci. Catat transaksi baru untuk melacak per gudang.
+                    Semua stok ada di <strong>{{ $item->warehouse->name }}</strong> namun belum terperinci. Catat transaksi baru untuk melacak per gudang.
                 @else
                     Barang ini belum ditempatkan di gudang manapun.
                 @endif
@@ -112,18 +112,18 @@
         </div>
 
         <div class="bg-white rounded-xl border border-ink-900/8 shadow-panel p-5 text-center">
-            <p class="text-[11px] uppercase tracking-wide text-ink-900/40 font-semibold mb-3">Kode Barcode</p>
+            <p class="text-[11px] uppercase tracking-wide text-ink-900/40 font-semibold mb-3">Kode barcode</p>
             <div id="barcode-target" class="flex justify-center"></div>
             <p class="font-mono text-sm mt-2 tracking-widest">{{ $item->barcode }}</p>
-            <a href="{{ route('barcode.label', $item) }}" target="_blank" class="inline-flex mt-3 text-xs font-semibold px-3 py-2 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Cetak Label</a>
+            <a href="{{ route('barcode.label', $item) }}" target="_blank" class="inline-flex mt-3 text-xs font-semibold px-3 py-2 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Cetak label</a>
         </div>
 
         <div class="bg-white rounded-xl border border-ink-900/8 shadow-panel p-5">
-            <p class="text-[11px] uppercase tracking-wide text-ink-900/40 font-semibold mb-3">Aksi Cepat</p>
+            <p class="text-[11px] uppercase tracking-wide text-ink-900/40 font-semibold mb-3">Aksi cepat</p>
             <div class="space-y-2">
-                <a href="{{ route('stock-in.create') }}?item_id={{ $item->id }}" class="flex items-center justify-between text-sm font-semibold px-3 py-2.5 rounded-lg border border-ink-900/15 hover:bg-moss-50 hover:border-moss-300">Catat Barang Masuk →</a>
-                <a href="{{ route('stock-out.create') }}?item_id={{ $item->id }}" class="flex items-center justify-between text-sm font-semibold px-3 py-2.5 rounded-lg border border-ink-900/15 hover:bg-amber-50 hover:border-amber-300">Catat Barang Keluar →</a>
-                <a href="{{ route('maintenance.create') }}?item_id={{ $item->id }}" class="flex items-center justify-between text-sm font-semibold px-3 py-2.5 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Ajukan Maintenance →</a>
+                <a href="{{ route('stock-in.create') }}?item_id={{ $item->id }}" class="flex items-center justify-between text-sm font-semibold px-3 py-2.5 rounded-lg border border-ink-900/15 hover:bg-moss-50 hover:border-moss-300">Catat barang masuk</a>
+                <a href="{{ route('stock-out.create') }}?item_id={{ $item->id }}" class="flex items-center justify-between text-sm font-semibold px-3 py-2.5 rounded-lg border border-ink-900/15 hover:bg-amber-50 hover:border-amber-300">Catat barang keluar</a>
+                <a href="{{ route('maintenance.create') }}?item_id={{ $item->id }}" class="flex items-center justify-between text-sm font-semibold px-3 py-2.5 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Ajukan maintenance</a>
             </div>
         </div>
     </div>

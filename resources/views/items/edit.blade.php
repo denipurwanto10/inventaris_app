@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Ubah Barang')
+@section('title', 'Ubah barang')
 @section('subtitle', $item->name)
 
 @section('content')
@@ -8,12 +8,12 @@
 
     <div class="grid sm:grid-cols-2 gap-4">
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Kode Barang</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Kode barang</label>
             <input type="text" name="code" value="{{ old('code', $item->code) }}" required
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama Barang</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama barang</label>
             <input type="text" name="name" value="{{ old('name', $item->name) }}" required
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
@@ -51,13 +51,13 @@
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Harga Beli (Rp)</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Harga beli (Rp)</label>
             <input type="number" step="0.01" min="0" name="purchase_price" value="{{ old('purchase_price', $item->purchase_price) }}"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
 
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Stok Minimum</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Stok minimum</label>
             <input type="number" min="0" name="min_stock" value="{{ old('min_stock', $item->min_stock) }}" required
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="sm:col-span-2">
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Lokasi Penyimpanan</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Lokasi penyimpanan</label>
             <input type="text" name="location" value="{{ old('location', $item->location) }}"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
@@ -84,7 +84,7 @@
 
     <div class="flex items-center gap-2 mt-4 pt-5 border-t border-ink-900/8">
         <a href="{{ route('items.show', $item) }}" class="text-sm font-semibold px-4 py-2.5 rounded-lg border border-ink-900/15 hover:bg-ink-900/5">Batal</a>
-        <button type="submit" class="text-sm font-semibold px-5 py-2.5 rounded-lg bg-moss-600 text-white hover:bg-moss-700">Simpan Perubahan</button>
+        <button type="submit" class="text-sm font-semibold px-5 py-2.5 rounded-lg bg-moss-600 text-white hover:bg-moss-700">Simpan perubahan</button>
     </div>
 </form>
 @endsection

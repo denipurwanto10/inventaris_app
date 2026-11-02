@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('title', 'Kategori')
-@section('subtitle', 'Kelompokkan barang berdasarkan jenisnya')
+@section('subtitle', 'Pengelompokan barang menurut jenisnya')
 
 @section('content')
 <div x-data="{ modalOpen: false, editing: null, form: { id: null, code: '', name: '', description: '' } }">
 
     <div class="flex flex-col sm:flex-row sm:items-center gap-3 justify-between mb-5">
         <form method="GET" class="flex-1 max-w-xs">
-            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari kategori…"
+            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari kategori"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </form>
         <button @click="modalOpen = true; editing = null; form = { id: null, code: '', name: '', description: '' }"
             class="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-lg bg-ink-950 text-white hover:bg-ink-900 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            Tambah Kategori
+            Tambah kategori
         </button>
     </div>
 
@@ -22,8 +22,8 @@
             <thead>
                 <tr class="text-left text-[11px] uppercase tracking-wide text-ink-900/40 border-b border-ink-900/8 bg-ink-900/[0.02]">
                     <th class="py-3 px-5 font-semibold">Kode</th>
-                    <th class="py-3 px-2 font-semibold">Nama Kategori</th>
-                    <th class="py-3 px-2 font-semibold">Jumlah Barang</th>
+                    <th class="py-3 px-2 font-semibold">Nama kategori</th>
+                    <th class="py-3 px-2 font-semibold">Jumlah barang</th>
                     <th class="py-3 px-5 font-semibold text-right">Aksi</th>
                 </tr>
             </thead>
@@ -57,7 +57,7 @@
     <div class="mt-4">{{ $categories->links() }}</div>
 
     {{-- Modal --}}
-    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 grid place-items-center p-4 bg-ink-950/50" @keydown.escape.window="modalOpen=false">
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 grid place-items-center p-4 bg-black/45 backdrop-blur-[2px]" x-transition:enter="transition-opacity duration-300 ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-200 ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @keydown.escape.window="modalOpen=false">
         <div @click.outside="modalOpen=false" class="bg-white rounded-2xl w-full max-w-md shadow-2xl">
             <form :action="editing ? `/categories/${editing}` : '{{ route('categories.store') }}'" method="POST" class="p-6">
                 @csrf
@@ -70,7 +70,7 @@
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40" placeholder="ELK">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama Kategori</label>
+                        <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Nama kategori</label>
                         <input type="text" name="name" x-model="form.name" required
                             class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40" placeholder="Elektronik">
                     </div>

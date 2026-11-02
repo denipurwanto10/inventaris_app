@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Ajukan Maintenance')
-@section('subtitle', 'Catat perbaikan, servis rutin, atau kalibrasi barang')
+@section('title', 'Ajukan maintenance')
+@section('subtitle', 'Perbaikan, servis rutin, atau kalibrasi')
 
 @section('content')
 <form action="{{ route('maintenance.store') }}" method="POST" class="max-w-2xl bg-white rounded-xl border border-ink-900/8 shadow-panel p-6">
@@ -15,7 +15,7 @@
             <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Tipe</label>
             <select name="type" required class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm">
                 <option value="perbaikan">Perbaikan</option>
-                <option value="servis_rutin">Servis Rutin</option>
+                <option value="servis_rutin">Servis rutin</option>
                 <option value="kalibrasi">Kalibrasi</option>
             </select>
         </div>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="sm:col-span-2">
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Deskripsi Masalah / Pekerjaan</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Deskripsi masalah / pekerjaan</label>
             <textarea name="description" rows="3" required class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">{{ old('description') }}</textarea>
         </div>
 
@@ -41,18 +41,18 @@
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Estimasi Biaya (Rp)</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Estimasi biaya (Rp)</label>
             <input type="number" step="0.01" min="0" name="cost" value="{{ old('cost') }}"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
 
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Tanggal Mulai</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Tanggal mulai</label>
             <input type="date" name="start_date" value="{{ old('start_date', now()->toDateString()) }}" required
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
         <div>
-            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Tanggal Selesai (opsional)</label>
+            <label class="block text-xs font-semibold text-ink-900/70 mb-1.5">Tanggal selesai (opsional)</label>
             <input type="date" name="end_date" value="{{ old('end_date') }}"
                 class="w-full rounded-lg border border-ink-900/15 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-moss-500/40">
         </div>
